@@ -187,7 +187,7 @@ function convertWcTagsToElements(root) {
 
   root.querySelectorAll('a').forEach(anchorElem => {
     let link = new URL(anchorElem.href)
-    // if (isGHP && link.origin === location.origin && link.pathname.indexOf(`/${config.repo}/`) !== 0) anchorElem.href = `/${config.repo}${link.pathname}`
+    if (isGHP && SubmitEvent.repo && link.origin === location.origin && link.pathname.indexOf(`/${config.repo}/`) !== 0) anchorElem.href = `/${config.repo}${link.pathname}`
   })
 
   /*
@@ -306,10 +306,6 @@ async function init() {
   convertWcTagsToElements()
   structureContent()
   setMeta()
-
-  console.log(config)
-  console.log(config.owner)
-  console.log(JSON.parse(config.owner))
 
   await getConfigExtras()
 
