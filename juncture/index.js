@@ -304,7 +304,7 @@ async function init() {
   }
 
   convertWcTagsToElements()
-  // structureContent()
+  structureContent()
   // setMeta()
 
   await getConfigExtras()
