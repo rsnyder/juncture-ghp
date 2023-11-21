@@ -308,6 +308,8 @@ async function init() {
   setMeta()
 
   console.log(config)
+  console.log(config.owner)
+  console.log(JSON.parse(config.owner))
 
   await getConfigExtras()
 
