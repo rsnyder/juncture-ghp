@@ -9,10 +9,13 @@ const junctureDependencies = [
   {tag: 'script', src: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js'},
 ]
 
+/*
 const isJunctureV1 = Array.from(document.querySelectorAll('param'))
   .find(param =>
     Array.from(param.attributes).find(attr => attr.name.indexOf('ve-') === 0)
   ) !== undefined
+*/
+const isJunctureV1 = document.querySelector('param[ve-config]') !== null
 
 function createJunctureV1App() {
   

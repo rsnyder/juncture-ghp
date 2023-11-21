@@ -19,7 +19,9 @@ async function getConfigExtras() {
   let resp = await fetch(`${config.baseurl}/juncture/config-extras.yml`)
   if (resp.ok) window.config = {
     ...window.config,
-    ...window.jsyaml.load(await resp.text())
+    ...window.jsyaml.load(await resp.text()),
+    isGHP,
+    isJunctureV1
   }
   if (isGHP) {
     if (!window.config.owner) window.config.owner = location.hostname.split('.')[0]
@@ -225,6 +227,17 @@ function convertWcTagsToElements(root) {
       })
       p.parentNode?.replaceChild(el, p)
     })
+
+  Array.from(root.querySelectorAll('param'))
+    .filter(param => Array.from(param.getAttributeNames()).find(attr => /^\w+-\w+/.test(attr) && attr !== 've-config'))
+    .forEach(param => {
+      let tag = Array.from(param.getAttributeNames()).find(attr => /^\w+-\w+/.test(attr))
+      let wcEl = document.createElement(tag)
+      param.getAttributeNames()
+        .filter(attr => attr !== tag)
+        .forEach(attr => wcEl.setAttribute(attr, param.getAttribute(attr)))
+      param.parentNode?.replaceChild(wcEl, param)
+    })
 }
 
 function componentHtml(el, tag) {
@@ -289,7 +302,6 @@ function loadDependencies(dependencies, callback, i) {
 }
 
 function loadDependency(dependency, callback) {
-  console.log(dependency)
   let e = document.createElement(dependency.tag)
   Object.entries(dependency).forEach(([k, v]) => { if (k !== 'tag') e.setAttribute(k, v) })
   e.addEventListener('load', callback)
