@@ -187,7 +187,7 @@ function convertWcTagsToElements(root) {
 
   root.querySelectorAll('a').forEach(anchorElem => {
     let link = new URL(anchorElem.href)
-    if (isGHP && link.origin === location.origin && link.pathname.indexOf(`/${config.repo}/`) !== 0) anchorElem.href = `/${config.repo}${link.pathname}`
+    // if (isGHP && link.origin === location.origin && link.pathname.indexOf(`/${config.repo}/`) !== 0) anchorElem.href = `/${config.repo}${link.pathname}`
   })
 
   /*
