@@ -21,6 +21,10 @@ async function getConfigExtras() {
     ...window.config,
     ...window.jsyaml.load(await resp.text())
   }
+  if (isGHP) {
+    if (!window.config.owner) window.config.owner = location.hostname.split('.')[0]
+    if (!window.config.repo) window.config.repo = location.pathname.split('/')[1]
+  }
   return window.config
 }
 
