@@ -1,3 +1,1 @@
 # ghp
-
-[Examples](examples)
