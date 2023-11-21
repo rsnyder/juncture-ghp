@@ -303,7 +303,7 @@ async function init() {
     document.querySelector('main').innerHTML = marked.parse(md)
   }
 
-  // convertWcTagsToElements()
+  convertWcTagsToElements()
   // structureContent()
   // setMeta()
 
